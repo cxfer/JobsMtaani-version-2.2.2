@@ -33,26 +33,15 @@ if (isset($_GET['provider']) && isset($_GET['code'])) {
                 throw new Exception('Unsupported provider');
         }
         
-        // Check if user needs onboarding (new social user)
+        // For Google login, we can directly authenticate the user
+        // For other providers, we still check if onboarding is needed
         $database = new Database();
         $db = $database->getConnection();
         $userObj = new User($db);
         $userData = $userObj->getUserById($user['id']);
         
-        // Check if user has completed onboarding
-        $needsOnboarding = false;
-        if (empty($userData['phone']) || empty($userData['address']) || empty($userData['city'])) {
-            $needsOnboarding = true;
-            $_SESSION['pending_user_id'] = $user['id'];
-            $_SESSION['pending_user_type'] = $user['user_type'];
-        }
-        
-        if ($needsOnboarding) {
-            // Redirect to onboarding form
-            header('Location: onboarding.php');
-            exit;
-        } else {
-            // Login the user
+        // For Google login, authenticate and redirect directly to dashboard
+        if ($provider === 'google') {
             Auth::login($userData);
             
             // Redirect based on user type
@@ -71,6 +60,40 @@ if (isset($_GET['provider']) && isset($_GET['code'])) {
                     header('Location: dashboard.php');
             }
             exit;
+        } else {
+            // For other providers, check if user needs onboarding
+            $needsOnboarding = false;
+            if (empty($userData['phone']) || empty($userData['address']) || empty($userData['city'])) {
+                $needsOnboarding = true;
+                $_SESSION['pending_user_id'] = $user['id'];
+                $_SESSION['pending_user_type'] = $user['user_type'];
+            }
+            
+            if ($needsOnboarding) {
+                // Redirect to onboarding form
+                header('Location: onboarding.php');
+                exit;
+            } else {
+                // Login the user
+                Auth::login($userData);
+                
+                // Redirect based on user type
+                switch($userData['user_type']) {
+                    case 'superadmin':
+                    case 'admin':
+                        header('Location: admin/');
+                        break;
+                    case 'service_provider':
+                        header('Location: provider/');
+                        break;
+                    case 'customer':
+                        header('Location: customer/');
+                        break;
+                    default:
+                        header('Location: dashboard.php');
+                }
+                exit;
+            }
         }
         
     } catch (Exception $e) {

@@ -162,7 +162,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !isset($_GET['code'])) {
             if (method_exists($userObj, 'setVerificationToken')) {
                 $userObj->setVerificationToken($userId, $verificationToken);
             }
-            $success = "Registration successful! Please check your email to verify your account.";
+            
+            // Set session variables for onboarding
+            $_SESSION['pending_user_id'] = $userId;
+            $_SESSION['pending_user_type'] = $user_type;
+            
+            // Redirect to onboarding page
+            header('Location: onboarding.php');
+            exit;
         } else {
             $errors[] = "Registration failed. Please try again.";
         }

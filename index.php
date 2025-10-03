@@ -25,7 +25,7 @@ $pageTitle = "Find Local Services in Kenya";
 include 'includes/unified_header.php';
 ?>
 
-<!-- Hero Section -->
+<!-- Hero Section 
 <section class="bg-primary text-white py-5">
     <div class="container py-5">
         <div class="row align-items-center">
@@ -42,7 +42,7 @@ include 'includes/unified_header.php';
             </div>
         </div>
     </div>
-</section>
+</section>-->
 
 <!-- Search Section -->
 <section class="py-5 bg-light">

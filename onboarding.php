@@ -29,7 +29,7 @@ if (Auth::isLoggedIn()) {
     exit;
 }
 
-// Check if we have a pending user from social login
+// Check if we have a pending user from registration or social login
 if (!isset($_SESSION['pending_user_id'])) {
     header('Location: login.php');
     exit;

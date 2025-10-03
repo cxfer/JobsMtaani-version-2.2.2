@@ -9,7 +9,7 @@
 //ini_set('session.cookie_secure', 0); // Set to 1 for HTTPS
 // Database configuration
 define('DB_HOST', 'localhost');
-define('DB_NAME', 'jobsmtaani');
+define('DB_NAME', 'jobsmtaanii');
 define('DB_USER', 'root');
 define('DB_PASS', '');
 
