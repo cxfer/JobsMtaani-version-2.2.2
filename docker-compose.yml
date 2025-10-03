@@ -1,0 +1,83 @@
+version: '3.8'
+
+services:
+  # MySQL Database
+  database:
+    image: mysql:8.0
+    container_name: jobsmtaani_db
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: jobsmtaani
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_USER: jobsmtaani_user
+      MYSQL_PASSWORD: jobsmtaani_pass
+    volumes:
+      - db_data:/var/lib/mysql
+      - ./database:/docker-entrypoint-initdb.d
+    ports:
+      - "3306:3306"
+    networks:
+      - jobsmtaani_network
+
+  # PHP Backend with Apache
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: production
+    container_name: jobsmtaani_backend
+    restart: unless-stopped
+    depends_on:
+      - database
+    environment:
+      DB_HOST: database
+      DB_NAME: jobsmtaani
+      DB_USER: jobsmtaani_user
+      DB_PASSWORD: jobsmtaani_pass
+    volumes:
+      - ./uploads:/var/www/html/uploads
+      - ./logs:/var/log/apache2
+    ports:
+      - "8080:80"
+    networks:
+      - jobsmtaani_network
+
+  # Next.js Frontend (Development)
+  frontend:
+    image: node:18-alpine
+    container_name: jobsmtaani_frontend
+    restart: unless-stopped
+    working_dir: /app
+    command: sh -c "npm install -g pnpm && pnpm install && pnpm dev"
+    volumes:
+      - .:/app
+      - /app/node_modules
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=development
+    networks:
+      - jobsmtaani_network
+
+  # phpMyAdmin (Optional - for database management)
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: jobsmtaani_phpmyadmin
+    restart: unless-stopped
+    depends_on:
+      - database
+    environment:
+      PMA_HOST: database
+      PMA_USER: root
+      PMA_PASSWORD: rootpassword
+    ports:
+      - "8081:80"
+    networks:
+      - jobsmtaani_network
+
+volumes:
+  db_data:
+
+networks:
+  jobsmtaani_network:
+    driver: bridge
