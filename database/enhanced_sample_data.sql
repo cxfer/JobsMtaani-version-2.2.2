@@ -1,97 +1,130 @@
--- Enhanced bookings with realistic Kenyan scenarios
+-- Enhanced Sample Data for JobsMtaani Platform
+-- This script adds more comprehensive sample data for testing all dashboard features
+
+USE jobsmtaani;
+
+-- Additional service providers
+INSERT INTO users (username, email, password_hash, first_name, last_name, phone, user_type, status, email_verified) VALUES
+('kevin_electrician', 'kevin@example.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'Kevin', 'Omondi', '+254711111111', 'service_provider', 'active', TRUE),
+('lisa_catering', 'lisa@example.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'Lisa', 'Kariuki', '+254722222222', 'service_provider', 'active', TRUE),
+('tom_tutor', 'tom@example.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'Tom', 'Waweru', '+254733333333', 'service_provider', 'active', TRUE),
+('susan_cleaning', 'susan@example.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'Susan', 'Nduta', '+254744444444', 'service_provider', 'active', TRUE),
+('mike_transport', 'mike@example.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'Mike', 'Gitau', '+254755555555', 'service_provider', 'active', TRUE);
+
+-- Additional customers
+INSERT INTO users (username, email, password_hash, first_name, last_name, phone, user_type, status, email_verified) VALUES
+('alice_customer', 'alice@example.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'Alice', 'Mutua', '+254766666666', 'customer', 'active', TRUE),
+('bob_customer', 'bob@example.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'Bob', 'Maina', '+254777777777', 'customer', 'active', TRUE),
+('carol_customer', 'carol@example.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'Carol', 'Wambui', '+254788888888', 'customer', 'active', TRUE),
+('dave_customer', 'dave@example.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'Dave', 'Kipchumba', '+254799999999', 'customer', 'active', TRUE);
+
+-- Additional user profiles
+INSERT INTO user_profiles (user_id, bio, address, city, state, country) VALUES
+(7, 'Certified electrician with 8+ years experience', 'Industrial Area, Nairobi', 'Nairobi', 'Nairobi County', 'Kenya'),
+(8, 'Professional catering service for all occasions', 'Lavington, Nairobi', 'Nairobi', 'Nairobi County', 'Kenya'),
+(9, 'Mathematics and Science tutor with 10+ years experience', 'Hurlingham, Nairobi', 'Nairobi', 'Nairobi County', 'Kenya'),
+(10, 'Professional cleaning service for homes and offices', 'Donholm, Nairobi', 'Nairobi', 'Nairobi County', 'Kenya'),
+(11, 'Reliable transport and delivery services', 'Machakos', 'Machakos', 'Machakos County', 'Kenya'),
+(12, 'Regular customer looking for quality services', 'Rongai, Nairobi', 'Nairobi', 'Nairobi County', 'Kenya'),
+(13, 'Frequent user of home maintenance services', 'Westlands, Nairobi', 'Nairobi', 'Nairobi County', 'Kenya'),
+(14, 'Regular customer for beauty and wellness services', 'Karen, Nairobi', 'Nairobi', 'Nairobi County', 'Kenya'),
+(15, 'Business owner looking for reliable service providers', 'Thika', 'Thika', 'Kiambu County', 'Kenya');
+
+-- Additional services with images
+INSERT INTO services (provider_id, category_id, title, slug, description, short_description, price, price_type, duration, location_type, is_active, images) VALUES
+(7, 2, 'Electrical Installation & Repair', 'electrical-installation-repair', 'Professional electrical installation and repair services for homes and businesses. Licensed electrician with 8+ years experience.', 'Expert electrical installation and repair', 2000.00, 'hourly', 60, 'at_customer', TRUE, '["/assets/images/plumbing-repair.jpg"]'),
+(7, 2, 'Lighting Fixture Installation', 'lighting-fixture-installation', 'Installation of new lighting fixtures including LED lights, chandeliers, and outdoor lighting.', 'Professional lighting fixture installation', 1500.00, 'fixed', 90, 'both', TRUE, '["/assets/images/house-cleaning.png"]'),
+(8, 8, 'Corporate Catering Services', 'corporate-catering-services', 'Professional catering for corporate events, meetings, and conferences. Custom menus for any occasion.', 'Corporate catering for events', 5000.00, 'negotiable', 240, 'at_customer', TRUE, '["/assets/images/event-photography.png"]'),
+(8, 8, 'Wedding Catering', 'wedding-catering', 'Specialized wedding catering with custom menus and professional service for your special day.', 'Wedding catering services', 8000.00, 'negotiable', 480, 'at_customer', TRUE, '["/assets/images/diverse-group-profile.png"]'),
+(9, 5, 'Mathematics Tutoring', 'mathematics-tutoring', 'Professional mathematics tutoring for students of all levels. Specialized in high school and college mathematics.', 'Expert mathematics tutoring', 1200.00, 'hourly', 60, 'both', TRUE, '["/assets/images/math-tutoring.png"]'),
+(9, 5, 'Science Tutoring (Physics & Chemistry)', 'science-tutoring', 'Comprehensive tutoring in Physics and Chemistry for high school and college students.', 'Science tutoring for students', 1500.00, 'hourly', 90, 'both', TRUE, '["/assets/images/man-profile.png"]'),
+(10, 6, 'Deep House Cleaning', 'deep-house-cleaning', 'Professional deep cleaning service for homes including kitchen, bathroom, and all rooms.', 'Thorough house cleaning service', 3500.00, 'fixed', 240, 'at_customer', TRUE, '["/assets/images/house-cleaning.png"]'),
+(10, 6, 'Office Cleaning Service', 'office-cleaning-service', 'Regular office cleaning service for businesses. Flexible scheduling and professional staff.', 'Professional office cleaning', 5000.00, 'negotiable', 180, 'at_customer', TRUE, '["/assets/images/diverse-group-of-service-providers.jpg"]'),
+(11, 3, 'Reliable Taxi Service', 'reliable-taxi-service', '24/7 reliable taxi service for individuals and groups. Well-maintained vehicles and professional drivers.', '24/7 taxi service', 800.00, 'fixed', 30, 'at_customer', TRUE, '["/assets/images/car-wash-detailing.jpg"]'),
+(11, 3, 'Package Delivery', 'package-delivery', 'Fast and reliable package delivery service within Nairobi and surrounding areas.', 'Package delivery service', 500.00, 'fixed', 60, 'at_customer', TRUE, '["/assets/images/diverse-group-profile.png"]');
+
+-- Additional provider availability
+INSERT INTO provider_availability (provider_id, day_of_week, start_time, end_time, is_available) VALUES
+-- Kevin Electrician (user_id: 7)
+(7, 1, '08:00:00', '18:00:00', TRUE), -- Monday
+(7, 2, '08:00:00', '18:00:00', TRUE), -- Tuesday
+(7, 3, '08:00:00', '18:00:00', TRUE), -- Wednesday
+(7, 4, '08:00:00', '18:00:00', TRUE), -- Thursday
+(7, 5, '08:00:00', '18:00:00', TRUE), -- Friday
+(7, 6, '09:00:00', '17:00:00', TRUE), -- Saturday
+
+-- Lisa Catering (user_id: 8)
+(8, 1, '07:00:00', '20:00:00', TRUE), -- Monday
+(8, 2, '07:00:00', '20:00:00', TRUE), -- Tuesday
+(8, 3, '07:00:00', '20:00:00', TRUE), -- Wednesday
+(8, 4, '07:00:00', '20:00:00', TRUE), -- Thursday
+(8, 5, '07:00:00', '20:00:00', TRUE), -- Friday
+(8, 6, '07:00:00', '22:00:00', TRUE), -- Saturday
+(8, 0, '08:00:00', '20:00:00', TRUE), -- Sunday
+
+-- Tom Tutor (user_id: 9)
+(9, 1, '16:00:00', '20:00:00', TRUE), -- Monday
+(9, 2, '16:00:00', '20:00:00', TRUE), -- Tuesday
+(9, 3, '16:00:00', '20:00:00', TRUE), -- Wednesday
+(9, 4, '16:00:00', '20:00:00', TRUE), -- Thursday
+(9, 5, '16:00:00', '20:00:00', TRUE), -- Friday
+(9, 6, '09:00:00', '17:00:00', TRUE), -- Saturday
+(9, 0, '09:00:00', '17:00:00', TRUE), -- Sunday
+
+-- Susan Cleaning (user_id: 10)
+(10, 1, '08:00:00', '18:00:00', TRUE), -- Monday
+(10, 2, '08:00:00', '18:00:00', TRUE), -- Tuesday
+(10, 3, '08:00:00', '18:00:00', TRUE), -- Wednesday
+(10, 4, '08:00:00', '18:00:00', TRUE), -- Thursday
+(10, 5, '08:00:00', '18:00:00', TRUE), -- Friday
+(10, 6, '08:00:00', '16:00:00', TRUE), -- Saturday
+
+-- Mike Transport (user_id: 11)
+(11, 1, '06:00:00', '22:00:00', TRUE), -- Monday
+(11, 2, '06:00:00', '22:00:00', TRUE), -- Tuesday
+(11, 3, '06:00:00', '22:00:00', TRUE), -- Wednesday
+(11, 4, '06:00:00', '22:00:00', TRUE), -- Thursday
+(11, 5, '06:00:00', '22:00:00', TRUE), -- Friday
+(11, 6, '06:00:00', '22:00:00', TRUE), -- Saturday
+(11, 0, '07:00:00', '21:00:00', TRUE); -- Sunday
+
+-- Additional bookings
 INSERT INTO bookings (booking_number, customer_id, provider_id, service_id, booking_date, booking_time, duration, total_amount, status, payment_status, location_type, service_address) VALUES
-('BK001', 10, 2, 1, '2024-01-20', '10:30:00', 60, 1200.00, 'completed', 'paid', 'at_provider', 'Muthomi Barbershop, Tom Mboya Street, Nairobi CBD'),
-('BK002', 11, 3, 3, '2024-01-22', '14:00:00', 180, 5000.00, 'confirmed', 'paid', 'at_provider', 'Glamour Beauty Salon, Madaraka, Nairobi'),
-('BK003', 12, 4, 5, '2024-01-25', '09:00:00', 60, 2500.00, 'in_progress', 'paid', 'at_customer', 'Hurlingham Apartments, Flat 5B'),
-('BK004', 13, 5, 7, '2024-01-28', '11:00:00', 60, 2500.00, 'pending', 'pending', 'at_provider', 'Tech Fixers Shop, Westlands, Nairobi'),
-('BK005', 14, 6, 9, '2024-02-01', '09:30:00', 240, 3500.00, 'confirmed', 'paid', 'at_customer', 'South B Residence, Nairobi'),
-('BK006', 10, 7, 11, '2024-02-03', '15:00:00', 60, 1200.00, 'completed', 'paid', 'both', 'Online session via Zoom'),
-('BK007', 11, 8, 13, '2024-02-05', '07:00:00', 60, 2000.00, 'confirmed', 'paid', 'at_provider', 'FitLife Gym, Lavington, Nairobi'),
-('BK008', 12, 9, 15, '2024-02-10', '10:00:00', 0, 50000.00, 'pending', 'pending', 'both', 'TBD - Planning stage');
+('BK004', 12, 7, 16, '2025-10-10', '14:00:00', 60, 2000.00, 'confirmed', 'paid', 'at_customer', 'Rongai Apartments, Apt 5A'),
+('BK005', 13, 8, 18, '2025-10-12', '18:00:00', 240, 5000.00, 'pending', 'pending', 'at_customer', 'Westlands Office Complex'),
+('BK006', 14, 9, 20, '2025-10-11', '16:00:00', 60, 1200.00, 'in_progress', 'paid', 'at_provider', 'Karen Learning Center'),
+('BK007', 15, 10, 22, '2025-10-15', '09:00:00', 240, 3500.00, 'confirmed', 'paid', 'at_customer', 'Thika Business Park'),
+('BK008', 5, 11, 24, '2025-10-08', '07:30:00', 30, 800.00, 'completed', 'paid', 'at_customer', 'Kilimani Shopping Center'),
+('BK009', 6, 2, 1, '2025-10-09', '10:00:00', 45, 800.00, 'completed', 'paid', 'at_provider', 'Westlands Barber Shop'),
+('BK010', 12, 3, 3, '2025-10-13', '14:00:00', 120, 2500.00, 'confirmed', 'paid', 'at_provider', 'Karen Beauty Salon');
 
--- Payments for bookings
-INSERT INTO payments (booking_id, payment_method, transaction_id, amount, status, processed_at) VALUES
-(1, 'mpesa', 'MPESA_BK001', 1200.00, 'completed', '2024-01-20 10:00:00'),
-(2, 'card', 'CARD_BK002', 5000.00, 'completed', '2024-01-22 13:30:00'),
-(3, 'mpesa', 'MPESA_BK003', 2500.00, 'completed', '2024-01-25 08:30:00'),
-(4, 'paypal', 'PAYPAL_BK004', 2500.00, 'pending', NULL),
-(5, 'bank_transfer', 'BANK_BK005', 3500.00, 'completed', '2024-02-01 09:00:00'),
-(6, 'mpesa', 'MPESA_BK006', 1200.00, 'completed', '2024-02-03 14:30:00'),
-(7, 'card', 'CARD_BK007', 2000.00, 'completed', '2024-02-05 06:30:00');
-
--- Reviews and ratings with realistic feedback
+-- Additional reviews
 INSERT INTO reviews (booking_id, reviewer_id, reviewee_id, rating, review_text, is_public) VALUES
-(1, 10, 2, 5, 'Exceptional service! Muthomi is a true professional. The hot towel treatment was incredibly relaxing and my haircut looks perfect. Will definitely be back!', TRUE),
-(2, 11, 3, 5, 'Outstanding bridal package. Grace transformed me for my wedding day. The makeup lasted all day and the hairstyle was exactly what I wanted. Highly recommended!', TRUE),
-(3, 12, 4, 4, 'Quick response to my plumbing emergency. Peter arrived within 30 minutes as promised and fixed the issue efficiently. Fair pricing and professional service.', TRUE),
-(6, 10, 7, 5, 'David is an excellent tutor. My son''s math grades have improved significantly since starting sessions with him. Patient, knowledgeable, and adapts to learning style.', TRUE),
-(7, 11, 8, 4, 'Great personal training session with Ann. She''s motivating and creates a workout plan tailored to your goals. The gym is well-equipped and clean.', TRUE);
+(4, 12, 7, 5, 'Kevin did an excellent job installing new lighting in my house. Professional and efficient service!', TRUE),
+(6, 14, 9, 4, 'Tom is a great tutor. My son''s math grades have improved significantly since starting sessions with him.', TRUE),
+(7, 15, 10, 5, 'Susan and her team did a fantastic deep cleaning of our office. Highly recommend!', TRUE),
+(8, 15, 11, 4, 'Mike is reliable and punctual. Got me to my meeting on time despite heavy traffic.', TRUE),
+(9, 5, 2, 5, 'John is the best barber in Nairobi! Always gives me exactly what I want.', TRUE),
+(10, 6, 3, 5, 'Mary did an amazing job for my birthday party makeup and hair. Everyone was impressed!', TRUE);
 
--- Notifications for users
+-- Additional notifications
 INSERT INTO notifications (user_id, title, message, type, is_read, action_url) VALUES
-(2, 'New Booking Request', 'You have a new booking request for Premium Haircut & Beard Grooming on Feb 5th at 2:00 PM', 'booking', FALSE, '/provider/bookings'),
-(3, 'Booking Confirmation', 'Your booking for Bridal Makeup & Hair Styling has been confirmed for Jan 22nd', 'booking', TRUE, '/customer/bookings'),
-(10, 'Service Reminder', 'Reminder: Your Premium Haircut appointment is tomorrow at 10:30 AM', 'booking', FALSE, '/customer/bookings'),
-(5, 'Payment Received', 'Payment of KES 2,500 received for Smartphone Screen Replacement booking', 'payment', TRUE, '/provider/payments'),
-(14, 'New Message', 'Glamour Beauty Salon has sent you a message regarding your booking', 'message', FALSE, '/customer/messages');
+(7, 'New Booking Request', 'You have a new booking request for Electrical Installation & Repair on Oct 10, 2025 at 2:00 PM', 'booking', FALSE, '/provider/bookings'),
+(8, 'Booking Confirmation', 'Your booking for Corporate Catering Services has been confirmed', 'booking', FALSE, '/customer/bookings'),
+(9, 'Payment Received', 'Payment of KES 1,200 received for Mathematics Tutoring session', 'payment', FALSE, '/provider/earnings'),
+(10, 'New Review', 'You received a 5-star review from Susan Nduta', 'review', FALSE, '/provider/reviews'),
+(11, 'Booking Reminder', 'Reminder: You have a taxi booking tomorrow at 7:30 AM', 'booking', FALSE, '/customer/bookings'),
+(2, 'Booking Update', 'Your booking with Jane Akinyi has been completed', 'booking', FALSE, '/provider/bookings'),
+(3, 'New Message', 'Mary Wanjiku sent you a message about your upcoming booking', 'system', FALSE, '/messages'),
+(5, 'Special Offer', 'Get 15% off your next booking with John Kamau', 'promotion', FALSE, '/services');
 
--- Conversations between users
-INSERT INTO conversations (booking_id, customer_id, provider_id, subject) VALUES
-(2, 11, 3, 'Bridal Makeup Consultation'),
-(4, 13, 5, 'Laptop Repair Inquiry'),
-(8, 12, 9, 'Wedding Planning Consultation');
-
--- Messages in conversations
-INSERT INTO messages (conversation_id, sender_id, message, is_read) VALUES
-(1, 11, 'Hi Grace, I''m interested in the bridal package for my wedding on March 15th. Can we schedule a consultation?', FALSE),
-(1, 3, 'Hello Faith, congratulations on your upcoming wedding! I''d be happy to schedule a consultation. How about this Friday at 2 PM?', FALSE),
-(2, 13, 'Hi Samuel, my laptop screen is cracked. Do you offer screen replacement for Dell laptops?', TRUE),
-(2, 5, 'Hi Dennis, yes we do offer Dell screen replacements. Please bring your laptop to our shop and we''ll give you a quote.', TRUE),
-(3, 12, 'Hello James, I''m planning a wedding for June and would like to discuss packages.', FALSE),
-(3, 9, 'Hi Carol, I''d love to help with your wedding planning. When would you like to meet to discuss details?', FALSE);
-
--- Favorites (services saved by customers)
-INSERT INTO favorites (user_id, service_id) VALUES
-(10, 1),
-(10, 3),
-(11, 5),
-(11, 7),
-(12, 9),
-(13, 11),
-(14, 13),
-(14, 15);
-
--- Coupons with realistic Kenyan promotions
-INSERT INTO coupons (code, description, discount_type, discount_value, minimum_amount, usage_limit, used_count, valid_from, valid_until, is_active, created_by) VALUES
-('WELCOME20', 'Welcome discount for new customers', 'percentage', 20.00, 1000.00, 200, 15, '2024-01-01', '2024-12-31', TRUE, 1),
-('SAVE100', 'Save KES 100 on bookings above KES 2000', 'fixed', 100.00, 2000.00, 100, 8, '2024-01-01', '2024-06-30', TRUE, 1),
-('FEBRUARY15', 'February special discount', 'percentage', 15.00, 1500.00, 50, 3, '2024-02-01', '2024-02-29', TRUE, 1),
-('LOYALTY10', 'Loyalty discount for returning customers', 'percentage', 10.00, 500.00, 300, 22, '2024-01-01', '2024-12-31', TRUE, 1);
-
--- User coupon usage
-INSERT INTO user_coupon_usage (user_id, coupon_id, used_at) VALUES
-(10, 1, '2024-01-20 09:30:00'),
-(11, 4, '2024-01-22 13:00:00'),
-(13, 2, '2024-01-28 10:30:00'),
-(14, 1, '2024-02-01 08:45:00');
-
--- Subscription plans for service providers
-INSERT INTO subscription_plans (name, description, price, duration_days, features, is_active, sort_order) VALUES
-('Basic Plan', 'Essential plan for new service providers', 1500.00, 30, '["List up to 5 services", "Basic analytics", "Email support"]', TRUE, 1),
-('Professional Plan', 'Advanced features for growing businesses', 3500.00, 30, '["List up to 20 services", "Advanced analytics", "Priority support", "Featured listing"]', TRUE, 2),
-('Premium Plan', 'All features for established businesses', 6500.00, 30, '["Unlimited services", "Premium analytics", "24/7 support", "Top placement", "Marketing boost"]', TRUE, 3);
-
--- User subscriptions
-INSERT INTO user_subscriptions (user_id, plan_id, start_date, end_date, status, payment_id) VALUES
-(2, 2, '2024-01-01', '2024-01-31', 'active', 1),
-(3, 3, '2024-01-01', '2024-01-31', 'active', 2),
-(4, 2, '2024-01-15', '2024-02-14', 'active', 3),
-(5, 1, '2024-01-10', '2024-02-09', 'active', 4);
-
--- System activity logs
-INSERT INTO activity_logs (user_id, action, table_name, record_id, old_values, new_values, ip_address) VALUES
-(10, 'created', 'bookings', 1, NULL, '{"booking_number":"BK001","customer_id":10,"provider_id":2,"service_id":1}', '192.168.1.100'),
-(2, 'updated', 'bookings', 1, '{"status":"pending"}', '{"status":"completed"}', '192.168.1.101'),
-(11, 'created', 'bookings', 2, NULL, '{"booking_number":"BK002","customer_id":11,"provider_id":3,"service_id":3}', '192.168.1.102'),
-(3, 'updated', 'bookings', 2, '{"status":"pending"}', '{"status":"confirmed"}', '192.168.1.103'),
-(1, 'created', 'services', 16, NULL, '{"provider_id":9,"category_id":8,"title":"Wedding Event Planning"}', '192.168.1.1');
+-- Additional activity logs
+INSERT INTO activity_logs (user_id, action, table_name, record_id) VALUES
+(12, 'Created booking', 'bookings', 4),
+(13, 'Viewed service', 'services', 18),
+(14, 'Updated profile', 'user_profiles', 9),
+(15, 'Made payment', 'payments', 7),
+(5, 'Left review', 'reviews', 6),
+(6, 'Booked service', 'bookings', 10),
+(7, 'Updated availability', 'provider_availability', 1),
+(8, 'Added service', 'services', 18);

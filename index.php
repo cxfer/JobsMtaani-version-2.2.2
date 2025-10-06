@@ -25,7 +25,7 @@ $pageTitle = "Find Local Services in Kenya";
 include 'includes/unified_header.php';
 ?>
 
-<!-- Hero Section 
+<!-- Hero Section -->
 <section class="bg-primary text-white py-5">
     <div class="container py-5">
         <div class="row align-items-center">
@@ -42,7 +42,7 @@ include 'includes/unified_header.php';
             </div>
         </div>
     </div>
-</section>-->
+</section>
 
 <!-- Search Section -->
 <section class="py-5 bg-light">
@@ -79,13 +79,25 @@ include 'includes/unified_header.php';
         <div class="row">
             <?php foreach ($categories as $category): ?>
             <div class="col-md-3 col-sm-6 mb-4">
-                <div class="card h-100 text-center border-0 shadow-sm">
+                <div class="card h-100 text-center border-0 shadow-sm <?php echo ($category['is_premium'] ?? 0) ? 'bg-warning bg-opacity-10 border border-warning' : ''; ?>">
                     <div class="card-body">
                         <div class="bg-primary bg-opacity-10 rounded-circle mx-auto mb-3 d-flex align-items-center justify-content-center" style="width: 80px; height: 80px;">
-                            <i class="fas fa-concierge-bell text-primary fs-2"></i>
+                            <i class="<?php echo htmlspecialchars($category['icon'] ?? 'fas fa-concierge-bell'); ?> text-primary fs-2"></i>
                         </div>
-                        <h5 class="card-title"><?php echo htmlspecialchars($category['name']); ?></h5>
+                        <h5 class="card-title">
+                            <?php echo htmlspecialchars($category['name']); ?>
+                            <?php if ($category['is_premium'] ?? 0): ?>
+                                <span class="badge bg-warning ms-2">Premium</span>
+                            <?php endif; ?>
+                        </h5>
                         <p class="text-muted small"><?php echo htmlspecialchars($category['description'] ?? ''); ?></p>
+                        <?php if ($category['is_premium'] ?? 0): ?>
+                            <div class="mt-2">
+                                <small class="text-warning">
+                                    <i class="fas fa-crown me-1"></i>Subscription required
+                                </small>
+                            </div>
+                        <?php endif; ?>
                     </div>
                 </div>
             </div>
@@ -200,3 +212,5 @@ include 'includes/unified_header.php';
 </section>
 
 <?php include 'includes/unified_footer.php'; ?>
+</body>
+</html>

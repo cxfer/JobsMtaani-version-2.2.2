@@ -13,7 +13,9 @@ echo "<script>
         'manage_services' => hasPermission($user, 'manage_services'),
         'view_analytics' => hasPermission($user, 'view_analytics'),
         'manage_payments' => hasPermission($user, 'manage_payments'),
-        'system_backup' => hasPermission($user, 'system_backup')
+        'system_backup' => hasPermission($user, 'system_backup'),
+        'manage_permissions' => hasPermission($user, 'manage_permissions'),
+        'view_audit_logs' => hasPermission($user, 'view_audit_logs')
     ]) . ";
 </script>";
 ?>

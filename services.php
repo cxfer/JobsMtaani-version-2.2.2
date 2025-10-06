@@ -55,6 +55,9 @@ include 'includes/unified_header.php';
                                 <?php foreach ($categories as $cat): ?>
                                 <option value="<?php echo $cat['id']; ?>" <?php echo $category == $cat['id'] ? 'selected' : ''; ?>>
                                     <?php echo htmlspecialchars($cat['name']); ?>
+                                    <?php if ($cat['is_premium'] ?? 0): ?>
+                                        (Premium)
+                                    <?php endif; ?>
                                 </option>
                                 <?php endforeach; ?>
                             </select>
@@ -117,11 +120,16 @@ include 'includes/unified_header.php';
             <div class="row">
                 <?php foreach ($all_services as $service_item): ?>
                 <div class="col-md-6 col-lg-4 mb-4">
-                    <div class="card h-100">
+                    <div class="card h-100 <?php echo ($service_item['is_premium'] ?? 0) ? 'border-warning border-2' : ''; ?>">
                         <img src="<?php echo htmlspecialchars($service_item['image']); ?>" class="card-img-top" alt="<?php echo htmlspecialchars($service_item['title']); ?>" style="height: 200px; object-fit: cover;">
                         <div class="card-body d-flex flex-column">
                             <div class="d-flex justify-content-between align-items-start mb-2">
-                                <h5 class="card-title"><?php echo htmlspecialchars($service_item['title']); ?></h5>
+                                <h5 class="card-title">
+                                    <?php echo htmlspecialchars($service_item['title']); ?>
+                                    <?php if ($service_item['is_premium'] ?? 0): ?>
+                                        <span class="badge bg-warning">PREMIUM</span>
+                                    <?php endif; ?>
+                                </h5>
                                 <?php if ($service_item['featured']): ?>
                                 <span class="badge bg-warning">FEATURED</span>
                                 <?php endif; ?>

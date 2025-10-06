@@ -11,7 +11,8 @@ echo "<script>
         'view_own_bookings' => hasPermission($user, 'view_own_bookings'),
         'leave_reviews' => hasPermission($user, 'leave_reviews'),
         'manage_favorites' => hasPermission($user, 'manage_favorites'),
-        'update_profile' => hasPermission($user, 'update_profile')
+        'update_profile' => hasPermission($user, 'update_profile'),
+        'manage_notifications' => hasPermission($user, 'manage_notifications')
     ]) . ";
 </script>";
 ?>

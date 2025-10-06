@@ -119,7 +119,7 @@ class Service {
 
     // Get service categories
     public function getCategories() {
-        $query = "SELECT * FROM service_categories WHERE is_active = 1 ORDER BY sort_order, name";
+        $query = "SELECT *, CASE WHEN is_premium = 1 THEN 'Premium' ELSE 'Standard' END as category_type FROM service_categories WHERE is_active = 1 ORDER BY sort_order, name";
         $stmt = $this->conn->prepare($query);
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
